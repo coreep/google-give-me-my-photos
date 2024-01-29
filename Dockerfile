@@ -1,15 +1,15 @@
-FROM mcr.microsoft.com/playwright:v1.41.0-jammy
+FROM ghcr.io/linuxserver/baseimage-kasmvnc:alpine318
 
-ARG DEBIAN_FRONTEND=noninteractive
+RUN apk add --no-cache firefox && echo "firefox" > /defaults/autostart
 
-RUN apt-get update; \
-    apt-get install -y x11vnc xvfb python3 python3-pip; \
-    apt-get -y clean;
-RUN mkdir ~/.vnc
+# RUN apt-get update; \
+    # apt-get install -y x11vnc xvfb python3 python3-pip; \
+    # apt-get -y clean;
+# RUN mkdir ~/.vnc
 
 COPY . /app
 WORKDIR /app
 
-RUN pip install playwright && playwright install
+# RUN pip install playwright && playwright install
 
-EXPOSE 5900
+EXPOSE 3000 3001 9080

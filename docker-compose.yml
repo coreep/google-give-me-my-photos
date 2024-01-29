@@ -3,7 +3,9 @@ services:
     image: downloader:latest
     container_name: downloader
     ports:
-      - 5900:5900
+      - 3000:3000
+      - 3001:3001
+      - 9080:9080
     build:
       context: .
     # command: 'xvfb-run python3 login.py'
