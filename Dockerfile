@@ -1,15 +1,10 @@
-FROM ghcr.io/linuxserver/baseimage-kasmvnc:alpine318
+FROM overclockedllama/docker-chromium
 
-RUN apk add --no-cache firefox && echo "firefox" > /defaults/autostart
-
-# RUN apt-get update; \
-    # apt-get install -y x11vnc xvfb python3 python3-pip; \
-    # apt-get -y clean;
-# RUN mkdir ~/.vnc
+RUN apk add python3 py3-pip --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community
 
 COPY . /app
 WORKDIR /app
 
-# RUN pip install playwright && playwright install
+RUN pip3 install playwright && playwright install
 
-EXPOSE 3000 3001 9080
+RUN echo "cd /app && python3 login.py" > /startapp.sh

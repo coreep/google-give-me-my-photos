@@ -6,6 +6,7 @@ services:
       - 3000:3000
       - 3001:3001
       - 9080:9080
+      - 5800:5800
     build:
       context: .
     # command: 'xvfb-run python3 login.py'
