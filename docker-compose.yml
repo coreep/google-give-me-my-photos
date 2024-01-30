@@ -3,12 +3,20 @@ services:
     image: downloader:latest
     container_name: downloader
     ports:
-      - 3000:3000
-      - 3001:3001
-      - 9080:9080
       - 5800:5800
     shm_size: 2g
     build:
       context: .
     # command: 'xvfb-run python3 login.py'
     # command: 'python3 download.py'
+
+  vnc:
+    image: vnc:latest
+    container_name: vnc
+    ports:
+      - 6080:6080
+      - 5901:5901
+    shm_size: 2g
+    build:
+      context: .
+      dockerfile: Dockerfile_from_ai
