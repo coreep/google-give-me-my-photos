@@ -23,41 +23,43 @@ def download_photos(page):
         return
 
     processed_files = load_progress()
-    current_file = None
+    selected_file = None
     last_file = None
 
     while True:
+        # Select image
         page.keyboard.press('ArrowRight')
         page.wait_for_timeout(100)
 
+        selected_file = page.evaluate('() => document.activeElement.href').split('/')[-1]
+
+        # There is no next file
+        if selected_file == last_file:
+            print('Done')
+            break
+
+        if selected_file in processed_files:
+            print(f'Skipping file {selected_file}')
+            continue
+
+        # Open image
         page.keyboard.press('Enter')
         page.wait_for_timeout(1000)
 
-        current_file = page.url.split('/')[-1]
-
-        if current_file == last_file:
-            print('The last file processed. Done')
-            break
-
-        if current_file in processed_files:
-            print(f'Skipping file {current_file}')
-            page.keyboard.press('Escape')
-            page.wait_for_timeout(1000)
-            continue
-
         with page.expect_download() as download_info:
+            # Trigger download with a short cut
             page.keyboard.down('Shift')
             page.keyboard.press('d')
             page.keyboard.up('Shift')
             download = download_info.value
             download.save_as(config.downloads_dir + download.suggested_filename)
 
-        print(f'Saved file {current_file} as {download.suggested_filename}')
+        print(f'Saved file {selected_file} as {download.suggested_filename}')
         with open(config.progress_file, 'a+') as progress_file:
-            progress_file.write(f'{current_file} {download.suggested_filename}\n')
+            progress_file.write(f'{selected_file} {download.suggested_filename}\n')
 
-        processed_files.append(current_file)
-        last_file = current_file
+        processed_files.append(selected_file)
+        last_file = selected_file
 
         page.wait_for_timeout(1000)
 
