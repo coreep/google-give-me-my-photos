@@ -7,6 +7,7 @@ services:
       - 3001:3001
       - 9080:9080
       - 5800:5800
+    shm_size: 2g
     build:
       context: .
     # command: 'xvfb-run python3 login.py'
