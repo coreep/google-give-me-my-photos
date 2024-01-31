@@ -1,4 +1,3 @@
-from playwright.sync_api import sync_playwright
 from get_browser import get_browser
 import config
 
@@ -67,6 +66,7 @@ def download_photos(page):
         page.wait_for_timeout(1000)
 
 if __name__ == "__main__":
+    from playwright.sync_api import sync_playwright
     with sync_playwright() as p:
         browser = get_browser(p)
         page = browser.new_page()

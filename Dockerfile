@@ -22,26 +22,17 @@ ENV DISPLAY=:1 \
     NOVNC_PORT=6080 \
     VNC_RESOLUTION=1280x800 \
     VNC_COL_DEPTH=24
-    # VNC_PASSWORD=password
 
 # Expose VNC and noVNC ports
 EXPOSE $VNC_PORT $NOVNC_PORT
 
-# Set up VNC password
-# RUN mkdir ~/.vnc && \
-    # echo $VNC_PASSWORD | vncpasswd -f > ~/.vnc/passwd && \
-    # chmod 600 ~/.vnc/passwd
-
 # Configure noVNC
 RUN ln -s /usr/share/novnc/vnc.html /usr/share/novnc/index.html
 
-# Copy a script to start VNC and noVNC
-COPY start.sh /start.sh
-RUN chmod +x /start.sh
-
-COPY . /app
+RUN mkdir /app
 WORKDIR /app
-
 RUN pip install playwright && playwright install
 
-CMD ["/start.sh"]
+COPY . /app
+
+ENTRYPOINT ["entrypoint.sh"]

@@ -1,4 +1,3 @@
-from playwright.sync_api import sync_playwright
 from get_browser import get_browser;
 
 def login(page):
@@ -13,6 +12,8 @@ def login(page):
         page.pause()
 
 if __name__ == "__main__":
+    from playwright.sync_api import sync_playwright
+
     with sync_playwright() as p:
         browser = get_browser(p)
         page = browser.new_page()

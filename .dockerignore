@@ -1,5 +1,10 @@
+.git
+.gitignore
+__pycache__
 downloads
 session
 venv
 wip*
-__pycache__
+docker-compose.yml
+Dockerfile
+tags
