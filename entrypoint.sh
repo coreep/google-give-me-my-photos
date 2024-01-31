@@ -21,4 +21,3 @@ if [ $# -eq 0 ]
     echo "---- Contianer will stop once '$@' finishes."
     exec "$@"
 fi
-echo "---- Exiting"

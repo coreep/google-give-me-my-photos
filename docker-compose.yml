@@ -8,4 +8,7 @@ services:
     shm_size: 2g
     build:
       context: .
-    command: 'python3 start.py'
+    volumes:
+      - ./session/:/app/session/
+      - ./downloads/:/app/downloads/
+    # command: 'python3 -u start.py'

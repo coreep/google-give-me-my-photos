@@ -7,7 +7,7 @@ def login(page):
         print('We are on photos page. No need to login')
         return
 
-    print('Complete login')
+    print('Complete login manually in browser')
     page.wait_for_url('https://photos.google.com/')
     print('Login successuly completed')
 

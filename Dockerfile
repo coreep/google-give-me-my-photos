@@ -35,7 +35,8 @@ RUN apt update && apt install -y \
 # Setup python playwright
 RUN pip install playwright && playwright install
 
-COPY . /app
 WORKDIR /app
+COPY . /app
 
 ENTRYPOINT ["/app/entrypoint.sh"]
+CMD python3 -u start.py
