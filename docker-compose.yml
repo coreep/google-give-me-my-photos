@@ -8,4 +8,4 @@ services:
     shm_size: 2g
     build:
       context: .
-    # command: 'python3 download.py'
+    command: 'python3 start.py'

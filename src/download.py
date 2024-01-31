@@ -25,7 +25,7 @@ def download_photos(page):
     selected_file = None
     last_file = None
 
-    while True:
+    while True and not page.is_closed():
         # Select image
         page.keyboard.press('ArrowRight')
         page.wait_for_timeout(100)

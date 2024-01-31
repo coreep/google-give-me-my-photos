@@ -7,9 +7,9 @@ def login(page):
         print('We are on photos page. No need to login')
         return
 
-    while 'https://photos.google.com' not in page.url:
-        print('Complete login')
-        page.pause()
+    print('Complete login')
+    page.wait_for_url('https://photos.google.com/')
+    print('Login successuly completed')
 
 if __name__ == "__main__":
     from playwright.sync_api import sync_playwright

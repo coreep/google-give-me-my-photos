@@ -12,8 +12,6 @@ RUN apt update && apt install -y \
     fluxbox \
     net-tools \
     novnc \
-    python3 \
-    python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
 # Set environment variables for VNC
@@ -29,10 +27,15 @@ EXPOSE $VNC_PORT $NOVNC_PORT
 # Configure noVNC
 RUN ln -s /usr/share/novnc/vnc.html /usr/share/novnc/index.html
 
-RUN mkdir /app
-WORKDIR /app
+# Install python
+RUN apt update && apt install -y \
+    python3 \
+    python3-pip \
+    && rm -rf /var/lib/apt/lists/*
+# Setup python playwright
 RUN pip install playwright && playwright install
 
 COPY . /app
+WORKDIR /app
 
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["/app/entrypoint.sh"]
