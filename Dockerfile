@@ -39,4 +39,3 @@ WORKDIR /app
 COPY . /app
 
 ENTRYPOINT ["/app/entrypoint.sh"]
-CMD python3 -u start.py

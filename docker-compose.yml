@@ -11,4 +11,4 @@ services:
     volumes:
       - ./session/:/app/session/
       - ./downloads/:/app/downloads/
-    # command: 'python3 -u start.py'
+    command: 'python3 -u start.py'
