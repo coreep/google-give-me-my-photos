@@ -8,7 +8,7 @@ def login(page):
         return
 
     print('Complete login manually in browser')
-    page.wait_for_url('https://photos.google.com/?pli=1')
+    page.wait_for_url('https://photos.google.com/*', 60000)
     print('Login successuly completed')
 
 if __name__ == "__main__":
